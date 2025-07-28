@@ -1,0 +1,59 @@
+﻿Doctor's Point Structure
+________________________________________________________________________________________________________________________________________________
+|--solution/
+|	|---Connected Services  ~Default
+|   |---Dependencie  ~Default
+|	|---Properties   ~Default
+|	|---Context      ~Contain AppDbContext:DbContext(will create table in database).
+|	|---Controllers  ~Interact with Repository.
+|	|		|
+|	|		|---AuthenticationController.cs
+|	|		|
+|	|		|
+|	|		|
+|	|---Migrations	 ~Default(Add-Migration).
+|	|---Models       ~Contains Entity files
+|	|		|---Entities-------------------Table Model-----------------------------------
+|	|		|		 |---Department.cs ~Master Table
+|	|		|		 |---Docter.cs ~Docter table
+|	|		|		 |---Patients.cs ~Patients table	
+|	|		|---DTOs-----------------------Data Tranfer Object---------------------------
+|	|		|		 |----Requests
+|	|		|		 |		 |
+|	|		|		 |        |---SignUpRequest.cs ~Request Data from Frontend
+|	|		|		 |        |---SignInRequest.cs ~Request Data from Frontend
+|	|		|        |---Responses
+|	|		|		 |        |
+|	|		|		 |        |---SignUpResponse.cs ~Give response for Signup Request
+|	|		|		 |        |---SignInResponse.cs ~Give Response for Signin Request
+|	|		|        |-------------------------------------------------------------------
+|	|---Repository	~Interact with Database
+|	|		|
+|	|		|---IAuthentication.cs(Interface)   ~contains Unimplemented method(SignUp() and SignIn())
+|	|		|---Authentication.cs(class)        ~Implementation of IAuthentication Interface
+|	|
+|	|---appsettings.json   ~Added ConnectionStrings
+|	|---Program.cs         ~Execution always starts from Main method present in it 
+|
+|_______________________________________________________________________________________________________________________________________________
+|
+|
+|--------------------------------------------------------DATA FLOW FOR SIGNUP-------------------------------------------------------------------
+|
+|
+|+--------------------+        +----------------------+        +-------------------------+        +--------------------+
+|                    | POST   |                      |        |                         |        |                    |
+|  React Frontend    +------->+ ASP.NET Controller   +------->+ Authentication Repo     +------->+  SQL Server DB     |
+| (Signup.jsx form)  | JSON   | (Authentication.cs)  | DTO    | (Business Logic Layer)  | Entity |  (Patients Table)  |
+|                    |        |                      |        |                         |        |                    |
++--------------------+        +----------------------+        +-------------------------+        +--------------------+
+|       |                             |                             |                               |
+|       |       - Collect form        |       - Deserialize JSON    | - Validate email             |
+|       |       - Validate fields     |       - Model: SignUpRequest| - Hash password              |
+|       |       - POST using Axios    |                             | - Create new `Patients` obj  |
+|       |                             |                             | - SaveChangesAsync()         |
+|       |                             |                             |                               |
+|       +-----------------------------+-----------------------------+-------------------------------+
+|
+|
+|

@@ -1,0 +1,6 @@
+@DoctorAppBackend_HostAddress = http://localhost:5130
+
+GET {{DoctorAppBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
