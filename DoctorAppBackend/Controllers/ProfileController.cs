@@ -41,6 +41,15 @@ namespace DoctorAppBackend.Controllers
                 return NotFound(new { msg = "Error while updating" });
             return Ok(new { msg = "Profile Updated Successfully" });
         }
+        [HttpDelete]
+        [Route("deletePatient")]
+        public async Task<IActionResult> DeletePatientAsync(DeletePatientByIdRequest request)
+        {
+            var result = await _profile.DeletePatient(request);
+            if (result.IsDeleted)
+                return Ok(result);
+            return Unauthorized(result);
+        }
     }
     
 }

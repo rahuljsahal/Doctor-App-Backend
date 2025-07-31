@@ -9,9 +9,9 @@ namespace DoctorAppBackend.Context
         {   
         }
         public DbSet<Patients> Patients { get; set; }
-        public DbSet<Hospitals> Hospitals { get; set; }
         public DbSet<Doctors> Doctors { get; set; }
         public DbSet<DepartmentMaster> Departments { get; set; }
+        public DbSet<Consultations> Consultations { get; set; }
 
 
         

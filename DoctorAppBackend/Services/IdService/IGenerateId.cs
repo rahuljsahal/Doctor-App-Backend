@@ -3,8 +3,8 @@
     public interface IGenerateId
     {
         string GeneratePatientId();
-        string GenerateHospitalId();
         string GenerateDoctorId();
         string GenrateDeptId();
+        string GenerateConsultId();
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorAppBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250728090920_Init")]
-    partial class Init
+    [Migration("20250729093202_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,8 @@ namespace DoctorAppBackend.Migrations
 
             modelBuilder.Entity("DoctorAppBackend.Model.Entities.DepartmentMaster", b =>
                 {
-                    b.Property<Guid>("DeptId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("DeptId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DeptName")
                         .HasColumnType("nvarchar(max)");
@@ -47,8 +46,11 @@ namespace DoctorAppBackend.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("DeptId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<double>("ConsultFee")
+                        .HasColumnType("float");
+
+                    b.Property<string>("DeptId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DoctorName")
                         .HasColumnType("nvarchar(max)");

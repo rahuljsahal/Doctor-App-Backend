@@ -27,11 +27,11 @@ namespace DoctorAppBackend
             builder.Services.AddScoped<IGenerateId, GenerateId>();
             builder.Services.AddScoped<IAuthentication, Authentication>();
             builder.Services.AddScoped<IAdmin, Admin>();
-            builder.Services.AddScoped<IHospital, Hospital>();
             builder.Services.AddScoped<IDoctor, Doctor>();
             builder.Services.AddScoped<IProfile, Profile>();
             builder.Services.AddScoped<IUpdateProfile, UpdateProfile>();
             builder.Services.AddScoped<IDepartment, Department>();
+            builder.Services.AddScoped<IConsult, Consult>();
             builder.Services.AddControllers();
             
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

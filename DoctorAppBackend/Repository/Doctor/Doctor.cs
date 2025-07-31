@@ -19,11 +19,7 @@ namespace DoctorAppBackend.Repository.Doctor
             
         }
 
-        public async Task<List<Hospitals>> GetAllHospitalsAsync()
-        {
-            return await _context.Hospitals.ToListAsync();
-            
-        }
+        
         public async Task<List<DepartmentMaster>> GetAllDeptAsync()
         {
             return await _context.Departments.ToListAsync();
@@ -48,8 +44,8 @@ namespace DoctorAppBackend.Repository.Doctor
                 Email = request.Email,
                 DeptId = request.DeptId,
                 Address = request.Address,
-                HCode = request.HCode,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber,
+                ConsultFee = request.ConsultFee
             };
 
             _context.Doctors.Add(doc);
@@ -60,6 +56,26 @@ namespace DoctorAppBackend.Repository.Doctor
                 Message = "Doctor Added Successfully"
 
             };   
+        }
+
+        public async Task<DeleteDoctorByIdResponse> DeleteDoctorAsync(DeleteDoctorByIdRequest request)
+        {
+            var exsists = await _context.Doctors.FirstOrDefaultAsync(d => d.DoctorId == request.DoctorId);
+            if(exsists == null)
+            {
+                return new DeleteDoctorByIdResponse
+                {
+                    IsDeleted = false,
+                    Msg = "Doctor Id Not Found"
+                };
+            }
+            _context.Doctors.Remove(exsists);
+            await _context.SaveChangesAsync();
+            return new DeleteDoctorByIdResponse
+            {
+                IsDeleted = true,
+                Msg = "Doctor Deleted Succesfully"
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DoctorAppBackend.Context;
+using DoctorAppBackend.Model.DTOs.Requests;
 using DoctorAppBackend.Model.DTOs.Responses;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -30,8 +31,25 @@ namespace DoctorAppBackend.Repository.UserRecords
                 Email = user.Email,
                 Dob = user.DOB,
                 Phno = user.PhoneNo
+            }; 
+        }
+        public async Task<DeletePatientByIdResponse> DeletePatient(DeletePatientByIdRequest request)
+        {
+            var exists = await _context.Patients.FirstOrDefaultAsync(p => p.PatientId == request.PatientId);
+            if (exists == null)
+                return new DeletePatientByIdResponse
+                {
+                    IsDeleted = false,
+                    Msg = "Patient Id Not Found"
+                };
+            _context.Patients.Remove(exists);
+            await _context.SaveChangesAsync();
+            return new DeletePatientByIdResponse
+            {
+                IsDeleted = true,
+                Msg = "Patient Deleted Successfull"
             };
-            
+
         }
     }
 }

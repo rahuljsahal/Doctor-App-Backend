@@ -7,7 +7,7 @@ namespace DoctorAppBackend.Repository.Doctor
     public interface IDoctor
     {
         Task<AddDoctorResponse> AddDoctorAsync(AddDoctorRequest request);
-        Task<List<Hospitals>> GetAllHospitalsAsync();
         Task<List<DepartmentMaster>> GetAllDeptAsync();
+        Task<DeleteDoctorByIdResponse> DeleteDoctorAsync(DeleteDoctorByIdRequest request);
     }
 }

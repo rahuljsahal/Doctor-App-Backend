@@ -16,13 +16,6 @@ namespace DoctorAppBackend.Controllers
             _doctor = doctor;
             
         }
-        
-        [HttpGet("hospitals")]
-        public async Task<IActionResult> GetHopitals()
-        {
-            var hospitals = await _doctor.GetAllHospitalsAsync();
-            return Ok(hospitals);
-        }
         [HttpGet("departments")]
         public async Task<IActionResult> GetAllDeptsAsync()
         {
@@ -40,6 +33,15 @@ namespace DoctorAppBackend.Controllers
                 return Ok(result);
             return Unauthorized(result);
 
+        }
+        [HttpDelete]
+        [Route("deleteDoctor")]
+        public async Task<IActionResult> DeleteDoctor(DeleteDoctorByIdRequest request)
+        {
+            var result = await _doctor.DeleteDoctorAsync(request);
+            if (result.IsDeleted)
+                return Ok(result);
+            return Unauthorized(result);
         }
     }
 }

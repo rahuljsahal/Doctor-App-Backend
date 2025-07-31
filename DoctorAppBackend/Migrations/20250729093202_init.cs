@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DoctorAppBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace DoctorAppBackend.Migrations
                 name: "Departments",
                 columns: table => new
                 {
-                    DeptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DeptId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DeptName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -30,10 +30,11 @@ namespace DoctorAppBackend.Migrations
                     DoctorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DeptId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConsultFee = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
