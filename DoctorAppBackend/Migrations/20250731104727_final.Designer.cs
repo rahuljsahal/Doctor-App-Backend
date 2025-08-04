@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorAppBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250729093202_init")]
-    partial class init
+    [Migration("20250731104727_final")]
+    partial class final
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,34 @@ namespace DoctorAppBackend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DoctorAppBackend.Model.Entities.Consultations", b =>
+                {
+                    b.Property<string>("ConsultId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("Aadhar")
+                        .HasColumnType("bigint");
+
+                    b.Property<double>("ConsultFee")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ConsultingDept")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConsultingDoctor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ConsultId");
+
+                    b.ToTable("Consultations");
+                });
 
             modelBuilder.Entity("DoctorAppBackend.Model.Entities.DepartmentMaster", b =>
                 {
@@ -67,19 +95,6 @@ namespace DoctorAppBackend.Migrations
                     b.HasKey("DoctorId");
 
                     b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("DoctorAppBackend.Model.Entities.Hospitals", b =>
-                {
-                    b.Property<string>("HospitalCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("HospitalName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("HospitalCode");
-
-                    b.ToTable("Hospitals");
                 });
 
             modelBuilder.Entity("DoctorAppBackend.Model.Entities.Patients", b =>

@@ -94,19 +94,6 @@ namespace DoctorAppBackend.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("DoctorAppBackend.Model.Entities.Hospitals", b =>
-                {
-                    b.Property<string>("HospitalCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("HospitalName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("HospitalCode");
-
-                    b.ToTable("Hospitals");
-                });
-
             modelBuilder.Entity("DoctorAppBackend.Model.Entities.Patients", b =>
                 {
                     b.Property<string>("PatientId")

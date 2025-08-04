@@ -6,11 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DoctorAppBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class final : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Consultations",
+                columns: table => new
+                {
+                    ConsultId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Aadhar = table.Column<long>(type: "bigint", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConsultingDept = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConsultingDoctor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ConsultFee = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Consultations", x => x.ConsultId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
@@ -42,18 +59,6 @@ namespace DoctorAppBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Hospitals",
-                columns: table => new
-                {
-                    HospitalCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    HospitalName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hospitals", x => x.HospitalCode);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Patients",
                 columns: table => new
                 {
@@ -75,13 +80,13 @@ namespace DoctorAppBackend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Consultations");
+
+            migrationBuilder.DropTable(
                 name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "Doctors");
-
-            migrationBuilder.DropTable(
-                name: "Hospitals");
 
             migrationBuilder.DropTable(
                 name: "Patients");
