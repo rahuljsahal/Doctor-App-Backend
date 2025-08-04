@@ -18,7 +18,7 @@ namespace DoctorAppBackend
             {
                 options.AddPolicy("AllowFrontend", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173")
+                    policy.WithOrigins("https://doctor-app-frontend-ashy.vercel.app/")
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
