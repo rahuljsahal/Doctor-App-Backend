@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorAppBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250731104727_final")]
-    partial class final
+    [Migration("20250804064848_Commit1")]
+    partial class Commit1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

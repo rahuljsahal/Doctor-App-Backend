@@ -56,6 +56,7 @@ namespace DoctorAppBackend
             app.MapControllers();
 
             app.Run();
+
         }
     }
 }

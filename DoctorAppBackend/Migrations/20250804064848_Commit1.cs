@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DoctorAppBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class final : Migration
+    public partial class Commit1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
