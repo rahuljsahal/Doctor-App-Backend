@@ -24,7 +24,29 @@ namespace DoctorAppBackend
                           .AllowCredentials();
                 });
             });
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
+
+            builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    
+                };
+            });
+
+            builder.Services.AddAuthorization();
+
+            // DB Context
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
+
+            // Dependency Injection - Custom Services
             builder.Services.AddScoped<IGenerateId, GenerateId>();
             builder.Services.AddScoped<IAuthentication, Authentication>();
             builder.Services.AddScoped<IAdmin, Admin>();
@@ -35,7 +57,7 @@ namespace DoctorAppBackend
             builder.Services.AddScoped<IConsult, Consult>();
             builder.Services.AddControllers();
             
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Swagger Setup
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
